@@ -1,8 +1,21 @@
-var Gweather = {};
+// create tab group
+var tabGroup = Ti.UI.createTabGroup();
 
-Ti.include('ui.js');
+// create weather window
+var win = Ti.UI.createWindow({  
+    title:'Weather',
+	url:'weather.js'
+});
 
-var win = Gweather.UI.createAppWindow();
+// create weather tab
+var tab = Ti.UI.createTab({ 
+    icon:'light_burst.png',
+    title:'Weather',
+    window:win
+});
 
-win.open();
+// add the tab to the tab group
+tabGroup.addTab(tab);
 
+// open tab group
+tabGroup.open();
