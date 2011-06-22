@@ -1,13 +1,10 @@
-(function() {
-	Gweather.UI = {};
+
+		var main = Ti.UI.currentWindow;
+		var wx_location = "66045";
+		main.title ='Lawrence Weather';
+
+function getGWeather(wx_location){
 		
-	Gweather.UI.createAppWindow = function(){
-		
-		var wx_location = "warsaw,poland";
-			    
-		var tabGroup = Ti.UI.createTabGroup();
-		
-		var main = Ti.UI.createWindow();
 
 		var actInd = Titanium.UI.createActivityIndicator({
 		bottom:10, 
@@ -22,7 +19,7 @@
 		
 		xhr.onload = function()
 		{
-			Ti.API.info('GWeather xml ' + this.responseXML + ' text ' + this.responseText);
+			Ti.API.info('Titanium xml ' + this.responseXML + ' text ' + this.responseText);
 			var doc = this.responseXML.documentElement;
 			
 			// create the table array
@@ -31,7 +28,7 @@
 			//create location table section
 			var info = doc.getElementsByTagName("forecast_information");
 			
-			data.push({title:'Location',font:{fontSize:18,fontWeight:'bold'},backgroundImage:'bgblue.png'});
+			data.push({title:'Location',font:{fontSize:18,fontWeight:'bold'},backgroundImage:'bgblue.png',});
 			var wx_time_array = info.item(0).getElementsByTagName("current_date_time").item(0).getAttribute("data").split(" ");
 			var wx_timestamp_array = wx_time_array[1].split(":");
 			var wx_date_array = wx_time_array[0].split("-");
@@ -77,28 +74,16 @@
 	        }
 		actInd.hide();
 		var table = Titanium.UI.createTableView({data:data});
-		main.add(table);
+	    Ti.UI.currentWindow.add(table);
 		};
 
 
 		// open the client
 		xhr.open('GET','http://www.google.com/ig/api?hl=en&weather='+wx_location);
-		
+	    
 		// send the data
 		xhr.send();
 
-		var tab = Ti.UI.createTab({  
-		    icon:'light_burst.png',  
-    		title:'GWeather',  
-		    window:main  
-		});
-		
-		// add the tab to the tab group  
-		tabGroup.addTab(tab);  
-
-		return tabGroup.open();
-
 	};
 	
-	
-})();
+getGWeather(wx_location);
