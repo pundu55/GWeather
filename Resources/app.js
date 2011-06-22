@@ -4,7 +4,7 @@ var tabGroup = Ti.UI.createTabGroup();
 // create weather window
 var win = Ti.UI.createWindow({  
     title:'Weather',
-	url:'weather.js'
+	url:'ui.js'
 });
 
 // create weather tab
